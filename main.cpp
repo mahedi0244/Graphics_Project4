@@ -14,30 +14,44 @@ GLfloat dt = 0.5;
 GLfloat axes[3][3] = {{1, 0, 0}, {0,1,0}, {0, 0, 1}};
 int axis = 0;
 
-/*
+
 //rotating torus
-void display (void){
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glPushMatrix();
-    glRotated(theta, axes[axis][0], axes[axis][1], axes[axis][2]);
-    glutSolidTorus(0.4, 1.0, 48, 96);
-    glPopMatrix();
-    glutSwapBuffers();
-}
-*/
+//void display (void){
+//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//    glPushMatrix();
+//    glRotated(theta, axes[axis][0], axes[axis][1], axes[axis][2]);
+//    glutSolidTorus(0.1, 0.5, 50, 100);
+//    glPopMatrix();
+//    glutSwapBuffers();
+//}
+
 
 //sun, earth and moon
 void display(void){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    //big sphere
     glutSolidSphere(0.4, 48, 48);
     glPushMatrix();
+
+    
+    //only big torus as there is pop here
+    glPushMatrix();
+    glRotated(theta, 1, 0, 0);
+    glutSolidTorus(0.005, 0.5, 50, 100);
+    glPopMatrix();
+    
+    //medium and small
     glRotated(theta, 0, 0, 1);
     glTranslated(1.35, 0, 0);
     glutSolidSphere(0.18, 48, 48);
     glPushMatrix();
+    
+    //small sphere
     glRotated(theta, 0, 0, 1);
     glTranslated(0.4, 0, 0);
     glutSolidSphere(0.1, 48, 48);
+    
     glPopMatrix();
     glPopMatrix();
     glutSwapBuffers();
