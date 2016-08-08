@@ -14,6 +14,8 @@ GLfloat dt = 0.5;
 GLfloat axes[3][3] = {{1, 0, 0}, {0,1,0}, {0, 0, 1}};
 int axis = 0;
 
+/*
+//rotating torus
 void display (void){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glPushMatrix();
@@ -22,6 +24,25 @@ void display (void){
     glPopMatrix();
     glutSwapBuffers();
 }
+*/
+
+//sun, earth and moon
+void display(void){
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glutSolidSphere(0.4, 48, 48);
+    glPushMatrix();
+    glRotated(theta, 0, 0, 1);
+    glTranslated(1.35, 0, 0);
+    glutSolidSphere(0.18, 48, 48);
+    glPushMatrix();
+    glRotated(theta, 0, 0, 1);
+    glTranslated(0.4, 0, 0);
+    glutSolidSphere(0.1, 48, 48);
+    glPopMatrix();
+    glPopMatrix();
+    glutSwapBuffers();
+}
+
 
 void idle(void){
     if(theta >= 360)
