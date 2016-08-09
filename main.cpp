@@ -159,22 +159,26 @@ void display(void){
     glRotated(theta, 0, 1, 0);
     
     
-    draw_toy();
-
+    
     glPushMatrix();
-    glTranslated(2, 0, -2);
+    glTranslated(0, 0, 2);
+    draw_toy();
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslated(2, 0, 0);
     glRotated(90, 0, 1, 0);
     draw_toy();
     glPopMatrix();
     
     glPushMatrix();
-    glTranslated(0, 0, -4);
+    glTranslated(0, 0, -2);
     glRotated(180, 0, 1, 0);
     draw_toy();
     glPopMatrix();
     
     glPushMatrix();
-    glTranslated(-2, 0, -2);
+    glTranslated(-2, 0, 0);
     glRotated(-90, 0, 1, 0);
     draw_toy();
     glPopMatrix();
@@ -247,12 +251,12 @@ int main(int argc, char** argv) {
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(200, 100);
     glutCreateWindow("GLUT Objects");
-    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClearColor(0.5, 0.5, 0.5, 0.0);
     
     glEnable(GL_DEPTH_TEST);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45, 1.0, 2, 12);
+    gluPerspective(45, 1.0, 2, 30);
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, front_amb_diff);
     glMaterialfv(GL_BACK, GL_AMBIENT_AND_DIFFUSE, front_amb_diff);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, spe);
@@ -261,7 +265,7 @@ int main(int argc, char** argv) {
     glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glTranslated(0, 0, -8);
+    glTranslated(0, 0, -20);
     
     glLightfv(GL_LIGHT0, GL_POSITION, pos);
     glEnable(GL_LIGHTING);
