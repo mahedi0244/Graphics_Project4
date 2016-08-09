@@ -26,11 +26,10 @@ int axis = 0;
 //}
 
 
-//sun, earth and moon
-void display(void){
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
-    
+
+
+
+void draw_toy(void){
     GLUquadricObj * quadObj = gluNewQuadric();
     gluQuadricDrawStyle(quadObj, GLU_FILL);
     
@@ -146,6 +145,51 @@ void display(void){
     glTranslated(-0.8, -0.40, 0);
     glutSolidSphere(.2, 50, 50);
     glPopMatrix();
+}
+
+
+
+
+
+//sun, earth and moon
+void display(void){
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    glPushMatrix();
+    glRotated(theta, 0, 1, 0);
+    
+    
+    draw_toy();
+
+    glPushMatrix();
+    glTranslated(2, 0, -2);
+    glRotated(90, 0, 1, 0);
+    draw_toy();
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslated(0, 0, -4);
+    glRotated(180, 0, 1, 0);
+    draw_toy();
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslated(-2, 0, -2);
+    glRotated(-90, 0, 1, 0);
+    draw_toy();
+    glPopMatrix();
+    
+    
+    
+    glPopMatrix();
+    
+    
+    
+    
+    
+    
+    
+    
     
     
 //    glutSolidSphere(0.8, 48, 48);
@@ -208,7 +252,7 @@ int main(int argc, char** argv) {
     glEnable(GL_DEPTH_TEST);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45, 1.0, 2, 8);
+    gluPerspective(45, 1.0, 2, 12);
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, front_amb_diff);
     glMaterialfv(GL_BACK, GL_AMBIENT_AND_DIFFUSE, front_amb_diff);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, spe);
