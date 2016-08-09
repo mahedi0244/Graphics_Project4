@@ -30,30 +30,161 @@ int axis = 0;
 void display(void){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    //big sphere
+    
+    GLUquadricObj * quadObj = gluNewQuadric();
+    gluQuadricDrawStyle(quadObj, GLU_FILL);
+    
+    //sphere head
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(0, 1.35, 0);
     glutSolidSphere(0.4, 48, 48);
-    glPushMatrix();
-
-    
-    //only big torus as there is pop here
-    glPushMatrix();
-    glRotated(theta, 1, 0, 0);
-    glutSolidTorus(0.005, 0.5, 50, 100);
     glPopMatrix();
     
-    //medium and small
-    glRotated(theta, 0, 0, 1);
-    glTranslated(1.35, 0, 0);
-    glutSolidSphere(0.18, 48, 48);
+    //right eye
     glPushMatrix();
-    
-    //small sphere
-    glRotated(theta, 0, 0, 1);
-    glTranslated(0.4, 0, 0);
-    glutSolidSphere(0.1, 48, 48);
-    
+    glTranslated(.15, 1.4, .4);
+    glutSolidSphere(0.05, 48, 48);
     glPopMatrix();
+    
+    //left eye
+    glPushMatrix();
+    glTranslated(-.15, 1.4, .4);
+    glutSolidSphere(0.05, 48, 48);
     glPopMatrix();
+    
+    //cylinder neck
+    glPushMatrix();
+    glTranslated(0, 1, 0);
+    //glRotated(theta, 0, 1, 0);
+    glRotated(90, 1, 0, 0);
+    gluCylinder(quadObj, 0.1, 0.1, 4, 50, 50);
+    glPopMatrix();
+    
+    //upper body
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(0, .2, 0);
+    glutSolidCube(.8);
+    glPopMatrix();
+    
+    //lower body
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(0, -0.6, 0);
+    glutSolidCube(.8);
+    glPopMatrix();
+    
+    
+    //right arm
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(0.5, 0.45, 0);
+    glutSolidCube(.3);
+    glPopMatrix();
+    
+    //right arm
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(0.8, 0.45, 0);
+    glutSolidCube(.3);
+    glPopMatrix();
+    
+    //right arm
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(0.8, 0.15, 0);
+    glutSolidCube(.3);
+    glPopMatrix();
+    
+    //right arm
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(0.8, -0.15, 0);
+    glutSolidCube(.3);
+    glPopMatrix();
+    
+    //right arm
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(0.8, -0.40, 0);
+    glutSolidSphere(.2, 50, 50);
+    glPopMatrix();
+    
+    
+    //left arm
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(-0.5, 0.45, 0);
+    glutSolidCube(.3);
+    glPopMatrix();
+    
+    //left arm
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(-0.8, 0.45, 0);
+    glutSolidCube(.3);
+    glPopMatrix();
+    
+    //left arm
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(-0.8, 0.15, 0);
+    glutSolidCube(.3);
+    glPopMatrix();
+    
+    //left arm
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(-0.8, -0.15, 0);
+    glutSolidCube(.3);
+    glPopMatrix();
+    
+    //left arm
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(-0.8, -0.40, 0);
+    glutSolidSphere(.2, 50, 50);
+    glPopMatrix();
+    
+    
+//    glutSolidSphere(0.8, 48, 48);
+//    
+//    glPushMatrix();
+//    glRotated(theta, 0, 1, 0);
+//    
+//    glPushMatrix();
+//    glTranslated(0.8, 0, 0);
+//    glutSolidSphere(0.8, 48, 48);
+//    glPopMatrix();
+//    
+//    glPushMatrix();
+//    glTranslated(-0.8, 0, 0);
+//    glutSolidSphere(0.8, 48, 48);
+//    glPopMatrix();
+//    
+//    glPushMatrix();
+//    glTranslated(0, -0.8, 0);
+//    glutSolidSphere(0.8, 48, 48);
+//    glPopMatrix();
+//    
+//    glPushMatrix();
+//    glTranslated(0, 0.8, 0);
+//    glutSolidSphere(0.8, 48, 48);
+//    glPopMatrix();
+//    
+//    glPushMatrix();
+//    glTranslated(0, 0, 0.8);
+//    glutSolidSphere(0.8, 48, 48);
+//    glPopMatrix();
+//    
+//    glPushMatrix();
+//    glTranslated(0, 0, -0.8);
+//    glutSolidSphere(0.8, 48, 48);
+//    glPopMatrix();
+//    
+//
+//    glPopMatrix();
     glutSwapBuffers();
 }
 
@@ -86,7 +217,7 @@ int main(int argc, char** argv) {
     glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glTranslated(0, 0, -5);
+    glTranslated(0, 0, -8);
     
     glLightfv(GL_LIGHT0, GL_POSITION, pos);
     glEnable(GL_LIGHTING);
