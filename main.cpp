@@ -7,11 +7,22 @@
 GLfloat pos[] = {-2, 4, 5, 1};
 GLfloat amb[] = {0.3, 0.3, 0.3, 1};
 GLfloat front_amb_diff[] = {0.5, 0.5, 0.1, 1.0};
-GLfloat blue[] = {0, 0, 1.0, 1.0};
 GLfloat red[] = {1.0, 0, 0, 1.0};
+GLfloat green[] = {0, 0.5, 0, 1.0};
+GLfloat blue[] = {0, 0, 1.0, 1.0};
+GLfloat white[] = {1.0, 1.0, 1.0, 1.0};
+GLfloat purple[] = {1.0, 0, 1.0, 1.0};
+GLfloat gray[] = {0.5, 0.5, 0.5, 1.0};
+GLfloat cyan[] = {0, 1.0, 1.0, 1.0};
 GLfloat back_amb_diff[] = {0.4, 0.7, 0.1, 1.0};
+
 GLfloat spe[] = {0.25, 0.25, 0.25, 1.0};
 GLfloat theta = 0;
+int theta1 = 0;
+int theta2 = 0;
+int theta3 = 0;
+int theta4 = 0;
+GLfloat x = 1;
 GLfloat dt = 0.5;
 GLfloat axes[3][3] = {{1, 0, 0}, {0,1,0}, {0, 0, 1}};
 int axis = 0;
@@ -34,9 +45,9 @@ int axis = 0;
 void draw_toy(void){
     GLUquadricObj * quadObj = gluNewQuadric();
     gluQuadricDrawStyle(quadObj, GLU_FILL);
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, front_amb_diff);
     
     //sphere head
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, front_amb_diff);
     glPushMatrix();
     //glRotated(theta, 0, 1, 0);
     glTranslated(0, 1.35, 0);
@@ -67,6 +78,7 @@ void draw_toy(void){
     glPopMatrix();
     
     //upper body
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, blue);
     glPushMatrix();
     //glRotated(theta, 0, 1, 0);
     glTranslated(0, .2, 0);
@@ -82,6 +94,7 @@ void draw_toy(void){
     
     
     //right arm
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, front_amb_diff);
     glPushMatrix();
     //glRotated(theta, 0, 1, 0);
     glTranslated(0.5, 0.45, 0);
@@ -109,13 +122,38 @@ void draw_toy(void){
     glutSolidCube(.3);
     glPopMatrix();
     
+    glPushMatrix();
+    glRotated(theta3, 1, 0, 0);
+    
     //right arm
     glPushMatrix();
     //glRotated(theta, 0, 1, 0);
-    glTranslated(0.8, -0.40, 0);
-    glutSolidSphere(.2, 50, 50);
+    glTranslated(0.8, -0.3, .2);
+    glutSolidCube(.3);
     glPopMatrix();
     
+    //right arm
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(0.8, -0.3, .5);
+    glutSolidCube(.3);
+    glPopMatrix();
+    
+    //right arm
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(0.8, -0.3, .8);
+    glutSolidCube(.3);
+    glPopMatrix();
+    
+    //right arm
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(0.8, -0.3, 1.1);
+    glutSolidCube(.3);
+    glPopMatrix();
+    
+    glPopMatrix();
     
     //left arm
     glPushMatrix();
@@ -123,6 +161,7 @@ void draw_toy(void){
     glTranslated(-0.5, 0.45, 0);
     glutSolidCube(.3);
     glPopMatrix();
+    
     
     //left arm
     glPushMatrix();
@@ -145,14 +184,81 @@ void draw_toy(void){
     glutSolidCube(.3);
     glPopMatrix();
     
+    glPushMatrix();
+    glRotated(theta3, 1, 0, 0);
+    
     //left arm
     glPushMatrix();
     //glRotated(theta, 0, 1, 0);
-    glTranslated(-0.8, -0.40, 0);
+    glTranslated(-0.8, -0.3, .2);
+    glutSolidCube(.3);
+    glPopMatrix();
+    
+    
+    //left arm
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(-0.8, -0.3, .5);
+    glutSolidCube(.3);
+    glPopMatrix();
+    
+    //left arm
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(-0.8, -0.3, .8);
+    glutSolidCube(.3);
+    glPopMatrix();
+    
+    //left arm
+    glPushMatrix();
+    //glRotated(theta, 0, 1, 0);
+    glTranslated(-0.8, -0.3, 1.1);
+    glutSolidCube(.3);
+    glPopMatrix();
+    
+    glPopMatrix();
+    
+    //right ball
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, blue);
+    glPushMatrix();
+    glRotated(theta1, 0, 0, 1);
+    glTranslated(0.8, -0.35, 1.2);
     glutSolidSphere(.2, 50, 50);
     glPopMatrix();
+    
+    //left ball
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, red);
+    glPushMatrix();
+    glRotated(theta2, 0, 0, 1);
+    glTranslated(-0.8, -0.35, 1.2);
+    glutSolidSphere(.2, 50, 50);
+    glPopMatrix();
+    
 }
 
+void draw_shed(){
+    GLUquadricObj * quadObj = gluNewQuadric();
+    gluQuadricDrawStyle(quadObj, GLU_FILL);
+    
+    //cylinder handle
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
+    glPushMatrix();
+    glTranslated(0, 6, 0);
+    glRotated(90, 1, 0, 0);
+    gluCylinder(quadObj, 0.1, 0.1, 9, 50, 50);
+    glPopMatrix();
+    
+    
+    //cone umbrella
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, purple);
+    glPushMatrix();
+    glTranslated(0, x, 0);
+    glRotated(-90, 1, 0, 0);
+    glutWireCone(5.0, 3.0, 50, 50);
+    glPopMatrix();
+    
+    
+}
 
 void draw_floor(void){
     
@@ -160,7 +266,7 @@ void draw_floor(void){
     gluQuadricDrawStyle(quadObj, GLU_FILL);
     
     //disc floor
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, red);
+    glMaterialfv(GL_BACK, GL_AMBIENT_AND_DIFFUSE, cyan);
     glPushMatrix();
     glTranslated(0, -3, 0);
     glRotated(90, 1, 0, 0);
@@ -168,7 +274,7 @@ void draw_floor(void){
     glPopMatrix();
     
     //disc floor
-    glMaterialfv(GL_BACK, GL_AMBIENT_AND_DIFFUSE, blue);
+    glMaterialfv(GL_BACK, GL_AMBIENT_AND_DIFFUSE, green);
     glPushMatrix();
     glTranslated(0, -3, 0);
     glRotated(90, 1, 0, 0);
@@ -176,7 +282,7 @@ void draw_floor(void){
     glPopMatrix();
     
     //disc floor
-    glMaterialfv(GL_BACK, GL_AMBIENT_AND_DIFFUSE, red);
+    glMaterialfv(GL_BACK, GL_AMBIENT_AND_DIFFUSE, cyan);
     glPushMatrix();
     glTranslated(0, -3, 0);
     glRotated(90, 1, 0, 0);
@@ -184,7 +290,7 @@ void draw_floor(void){
     glPopMatrix();
     
     //disc floor
-    glMaterialfv(GL_BACK, GL_AMBIENT_AND_DIFFUSE, blue);
+    glMaterialfv(GL_BACK, GL_AMBIENT_AND_DIFFUSE, green);
     glPushMatrix();
     glTranslated(0, -3, 0);
     glRotated(90, 1, 0, 0);
@@ -192,16 +298,16 @@ void draw_floor(void){
     glPopMatrix();
     
     //disc floor
-    glMaterialfv(GL_BACK, GL_AMBIENT_AND_DIFFUSE, red);
+    glMaterialfv(GL_BACK, GL_AMBIENT_AND_DIFFUSE, cyan);
     glPushMatrix();
     glTranslated(0, -3, 0);
     glRotated(90, 1, 0, 0);
     gluDisk(quadObj, 5.2, 6.2, 50, 50);
     glPopMatrix();
+    
 }
 
 
-//sun, earth and moon
 void display(void){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -209,7 +315,7 @@ void display(void){
     glPushMatrix();
     glRotated(theta, 0, 1, 0);
     
-
+    draw_shed();
     draw_floor();
     
     glPushMatrix();
@@ -290,10 +396,29 @@ void display(void){
 
 
 void idle(void){
-    if(theta >= 360)
-        axis = (axis+1)%3;
     
-    theta = (theta < 360) ? theta + dt : dt;
+    if (x <= 3)
+        x = x + .003;
+    
+    if (x > 3){
+        
+        theta = (theta < 360) ? theta + dt : dt;
+        
+        if (theta1 <= 180 )
+            theta1 = (theta1 + 4) % 180;
+        
+        if (theta2 <= 180 )
+            theta2 = (theta2 - 4) % 180;
+        
+        if (theta3 <= 45)
+            theta3 = (theta3+1) % 45;
+    }
+    
+    glutPostRedisplay();
+}
+
+void hand_rotate(){
+    
     glutPostRedisplay();
 }
 
