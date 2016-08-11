@@ -22,7 +22,10 @@ GLfloat theta = 0;
 int theta1 = 0;
 int theta2 = 0;
 int theta3 = 0;
+
+int y = 0;
 GLfloat x = 1.0;
+
 GLfloat dt = 0.5;
 
 void draw_toy(void){
@@ -270,6 +273,8 @@ void draw_rocket(void){
     GLUquadricObj * quadObj = gluNewQuadric();
     gluQuadricDrawStyle(quadObj, GLU_FILL);
     
+    glRotated(-90, 0, 0, 1);
+    
     //upper cone
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, blue);
     glPushMatrix();
@@ -286,12 +291,20 @@ void draw_rocket(void){
     gluCylinder(quadObj, 0.3, 0.3, 1.3, 50, 50);
     glPopMatrix();
     
+    //mid-upper cone
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, purple);
+    glPushMatrix();
+    glTranslated(-3, .7, 5);
+    glRotated(270, 1, 0, 0);
+    glutSolidCone(0.4, .8, 50, 50);
+    glPopMatrix();
+    
     //mid-lower cone
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, red);
     glPushMatrix();
     glTranslated(-3, .6, 5);
     glRotated(270, 1, 0, 0);
-    glutWireCone(0.3, 0.6, 50, 50);
+    glutSolidCone(0.3, 0.6, 50, 50);
     glPopMatrix();
     
     //lower cone
@@ -299,7 +312,7 @@ void draw_rocket(void){
     glPushMatrix();
     glTranslated(-3, .5, 5);
     glRotated(270, 1, 0, 0);
-    glutWireCone(0.3, 0.5, 50, 50);
+    glutSolidCone(0.3, 0.5, 50, 50);
     glPopMatrix();
 }
 
@@ -309,8 +322,12 @@ void display(void){
     
     glPushMatrix();
     glRotated(theta, 0, 1, 0);
-    
+    glTranslated(7, 0, 8);
     draw_rocket();
+    glPopMatrix();
+    
+    glPushMatrix();
+    glRotated(theta, 0, 1, 0);
     
     draw_shed();
     draw_floor();
@@ -423,7 +440,7 @@ int main(int argc, char** argv) {
     glEnable(GL_DEPTH_TEST);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45, 1.0, 2, 30);
+    gluPerspective(45, 1.0, 2, 40);
     
     glMaterialfv(GL_BACK, GL_AMBIENT_AND_DIFFUSE, back_amb_diff);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, spe);
