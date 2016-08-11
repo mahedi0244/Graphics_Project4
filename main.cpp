@@ -1,8 +1,10 @@
+# include <iostream>
 #ifdef __APPLE_CC__
 #include <GLUT/glut.h>
 #else
 #include <GL/glut.h>
 #endif
+using namespace std;
 
 GLfloat pos[] = {-2, 4, 5, 1};
 GLfloat amb[] = {0.3, 0.3, 0.3, 1};
@@ -21,15 +23,19 @@ GLfloat back_amb_diff[] = {0.4, 0.7, 0.1, 1.0};
 
 GLfloat theta = 0;
 GLfloat theta4 = 0;
+
+GLfloat x = 1.0;
+GLfloat dt = 0.5;
+
 int theta1 = 0;
 int theta2 = 0;
 int theta3 = 0;
 int theta5 = 0;
-
 int y = 0;
 
-GLfloat x = 1.0;
-GLfloat dt = 0.5;
+int cameraX = 0;
+int cameraY = 0;
+int cameraZ = -15;
 
 bool juggling = false;
 
@@ -392,6 +398,8 @@ void keyboard(unsigned char key, int x, int y){
             
         case 'd' :  juggling = false; break;
         
+        //case 'x' :  cameraX= cameraX + .01; glTranslated(cameraX, cameraY, cameraZ); break;
+        
     }
     
     glutPostRedisplay();
@@ -509,7 +517,7 @@ int main(int argc, char** argv) {
     glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glTranslated(0, 0, -15);
+    glTranslated(cameraX, cameraY, cameraZ);
     
     glLightfv(GL_LIGHT0, GL_POSITION, pos);
     glEnable(GL_LIGHTING);
