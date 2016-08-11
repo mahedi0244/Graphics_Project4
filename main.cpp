@@ -1,3 +1,8 @@
+/*
+s - to start the ball juggling animation
+d - to stop the ball juggling animation
+*/
+
 #ifdef __APPLE_CC__
 #include <GLUT/glut.h>
 #else
@@ -185,7 +190,6 @@ void draw_toy(void){
     glutSolidCube(.3);
     glPopMatrix();
     
-    
     //left arm
     glPushMatrix();
     glTranslated(-0.8, -0.3, .5);
@@ -315,8 +319,7 @@ void draw_rocket(void){
     gluQuadricDrawStyle(quadObj, GLU_FILL);
     
     glPushMatrix();
-    
-    
+   
     //upper cone
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, front_amb_diff);
     glMaterialfv(GL_BACK, GL_AMBIENT_AND_DIFFUSE, white);
@@ -477,7 +480,7 @@ void idle(void){
     if (x <= 2.5)
         x = x + .003;
     
-    //toys animation start after the shed is all the way up
+    //toys' animation start after the shed is all the way up
     if (x > 2.5){
         
         theta = (theta < 360) ? theta + dt : dt;
@@ -510,7 +513,7 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(0, 100);
-    glutCreateWindow("Alien Ball Juggling'");
+    glutCreateWindow("Aliens' Ball Juggling");
     glClearColor(0, 0, 0.1, 1);
     
     glEnable(GL_DEPTH_TEST);
