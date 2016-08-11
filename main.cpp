@@ -27,9 +27,11 @@ int theta3 = 0;
 int theta5 = 0;
 
 int y = 0;
-GLfloat x = 1.0;
 
+GLfloat x = 1.0;
 GLfloat dt = 0.5;
+
+bool juggling = false;
 
 void draw_toy(void){
     GLUquadricObj * quadObj = gluNewQuadric();
@@ -382,6 +384,19 @@ void draw_satelite(void){
     glPopMatrix();
 }
 
+void keyboard(unsigned char key, int x, int y){
+    
+    switch(key){
+            
+        case 's' :  juggling = true; break;
+            
+        case 'd' :  juggling = false; break;
+        
+    }
+    
+    glutPostRedisplay();
+}
+
 void display(void){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -450,21 +465,25 @@ void idle(void){
     if (x > 2.5){
         
         theta = (theta < 360) ? theta + dt : dt;
-        
-        if (theta1 <= 180 )
-            theta1 = (theta1 + 4) % 180;
-        
-        if (theta2 <= 180 )
-            theta2 = (theta2 - 4) % 180;
-        
-        if (theta3 <= 45)
-            theta3 = (theta3+1) % 45;
-        
         theta4 = (theta4 < 360) ? theta4 + .2 : .2;
         
         if (theta5 < 360)
             theta5 = (theta5-1) % 360;
     
+    }
+    
+    if (juggling == true){
+        
+        //hand movement
+        if (theta3 <= 45)
+            theta3 = (theta3+1) % 45;
+        
+        //ball juggling
+        if (theta1 <= 180 )
+            theta1 = (theta1 + 4) % 180;
+        
+        if (theta2 <= 180 )
+            theta2 = (theta2 - 4) % 180;
     }
     
     glutPostRedisplay();
@@ -496,6 +515,7 @@ int main(int argc, char** argv) {
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
     glutDisplayFunc(display);
+    glutKeyboardFunc(keyboard);
     glutIdleFunc(idle);
     glutMainLoop();
     
