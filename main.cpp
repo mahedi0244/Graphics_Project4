@@ -209,10 +209,10 @@ void draw_shed(){
     glPushMatrix();
     glTranslated(0, 6, 0);
     glRotated(90, 1, 0, 0);
-    gluCylinder(quadObj, 0.1, 0.1, 9, 50, 50);
+    gluCylinder(quadObj, 0.2, 0.2, 9, 50, 50);
     glPopMatrix();
     
-    //cone umbrella
+    //cone umbrella lower
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, purple);
     glPushMatrix();
     glTranslated(0, x, 0);
@@ -220,6 +220,23 @@ void draw_shed(){
     glutWireCone(5.0, 3.0, 50, 50);
     glPopMatrix();
     
+    //cone umbrella mid
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, blue);
+    glPushMatrix();
+    glTranslated(0, x, 0);
+    glTranslated(0, .8, 0);
+    glRotated(-90, 1, 0, 0);
+    glutWireCone(4.0, 2.5, 50, 50);
+    glPopMatrix();
+    
+    //cone umbrella lower
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, red);
+    glPushMatrix();
+    glTranslated(0, x, 0);
+    glTranslated(0, 1.6, 0);
+    glRotated(-90, 1, 0, 0);
+    glutWireCone(3.0, 2, 50, 50);
+    glPopMatrix();
 }
 
 void draw_floor(void){
@@ -273,6 +290,8 @@ void draw_rocket(void){
     GLUquadricObj * quadObj = gluNewQuadric();
     gluQuadricDrawStyle(quadObj, GLU_FILL);
     
+    glPushMatrix();
+    glTranslated(7, 6, 10);
     glRotated(-90, 0, 0, 1);
     
     //upper cone
@@ -314,21 +333,30 @@ void draw_rocket(void){
     glRotated(270, 1, 0, 0);
     glutSolidCone(0.3, 0.5, 50, 50);
     glPopMatrix();
+    
+    glPopMatrix();
 }
 
 
-void display(void){
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+void draw_moon(){
     
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, white);
     glPushMatrix();
-    glRotated(theta, 0, 1, 0);
-    glTranslated(7, 0, 8);
-    draw_rocket();
+    glTranslated(-8, 8, -6);
+    glutSolidSphere(2, 60, 60);
     glPopMatrix();
     
+}
+
+void display(void){
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    draw_moon();
+    
     glPushMatrix();
     glRotated(theta, 0, 1, 0);
     
+    draw_rocket();
     draw_shed();
     draw_floor();
     
@@ -359,60 +387,15 @@ void display(void){
     
     glutSwapBuffers();
     
-    
-    
-    
-    
-    
-    
-//    glutSolidSphere(0.8, 48, 48);
-//    
-//    glPushMatrix();
-//    glRotated(theta, 0, 1, 0);
-//    
-//    glPushMatrix();
-//    glTranslated(0.8, 0, 0);
-//    glutSolidSphere(0.8, 48, 48);
-//    glPopMatrix();
-//    
-//    glPushMatrix();
-//    glTranslated(-0.8, 0, 0);
-//    glutSolidSphere(0.8, 48, 48);
-//    glPopMatrix();
-//    
-//    glPushMatrix();
-//    glTranslated(0, -0.8, 0);
-//    glutSolidSphere(0.8, 48, 48);
-//    glPopMatrix();
-//    
-//    glPushMatrix();
-//    glTranslated(0, 0.8, 0);
-//    glutSolidSphere(0.8, 48, 48);
-//    glPopMatrix();
-//    
-//    glPushMatrix();
-//    glTranslated(0, 0, 0.8);
-//    glutSolidSphere(0.8, 48, 48);
-//    glPopMatrix();
-//    
-//    glPushMatrix();
-//    glTranslated(0, 0, -0.8);
-//    glutSolidSphere(0.8, 48, 48);
-//    glPopMatrix();
-//    
-//
-//    glPopMatrix();
-    
 }
-
 
 void idle(void){
     
-    if (x <= 3)
+    if (x <= 2.5)
         x = x + .003;
     
     //toys animation start after the shed is all the way up
-    if (x > 3){
+    if (x > 2.5){
         
         theta = (theta < 360) ? theta + dt : dt;
         
@@ -435,7 +418,7 @@ int main(int argc, char** argv) {
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(200, 100);
     glutCreateWindow("Juggling Toys'");
-    glClearColor(0, 0, 0, 0.0);
+    glClearColor(0, 0, 0.1, 1);
     
     glEnable(GL_DEPTH_TEST);
     glMatrixMode(GL_PROJECTION);
@@ -459,14 +442,3 @@ int main(int argc, char** argv) {
     glutMainLoop();
     
 }
-
-
-
-
-
-
-
-
-
-
-
