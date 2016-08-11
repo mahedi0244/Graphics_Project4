@@ -1,10 +1,8 @@
-# include <iostream>
 #ifdef __APPLE_CC__
 #include <GLUT/glut.h>
 #else
 #include <GL/glut.h>
 #endif
-using namespace std;
 
 GLfloat pos[] = {-2, 4, 5, 1};
 GLfloat amb[] = {0.3, 0.3, 0.3, 1};
@@ -412,9 +410,7 @@ void keyboard(unsigned char key, int x, int y){
         case 's' :  juggling = true; break;
             
         case 'd' :  juggling = false; break;
-        
-        //case 'x' :  cameraX= cameraX + .01; glTranslated(cameraX, cameraY, cameraZ); break;
-        
+            
     }
     
     glutPostRedisplay();
@@ -439,10 +435,7 @@ void display(void){
     draw_rocket();
     glPopMatrix();
     
-    glPushMatrix();
-    
     draw_satelite();
-    glPopMatrix();
     
     glPushMatrix();
     glRotated(theta, 0, 1, 0);
