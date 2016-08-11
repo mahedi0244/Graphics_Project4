@@ -48,20 +48,35 @@ void draw_toy(void){
     glPushMatrix();
     //glRotated(theta, 0, 1, 0);
     glTranslated(0, 1.35, 0);
-    glutSolidSphere(0.4, 48, 48);
+    glutSolidSphere(0.45, 48, 48);
     glPopMatrix();
     
     //right eye
-    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, blue);
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, red);
     glPushMatrix();
-    glTranslated(.15, 1.4, .4);
+    glTranslated(.15, 1.45, .4);
     glutSolidSphere(0.05, 48, 48);
     glPopMatrix();
     
     //left eye
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, red);
     glPushMatrix();
-    glTranslated(-.15, 1.4, .4);
+    glTranslated(-.15, 1.45, .4);
     glutSolidSphere(0.05, 48, 48);
+    glPopMatrix();
+    
+    //nose
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, blue);
+    glPushMatrix();
+    glTranslated(0, 1.28, .3);
+    glutSolidCone(.1, .3, 50, 50);
+    glPopMatrix();
+    
+    //mouth
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, green);
+    glPushMatrix();
+    glTranslated(0, 1.15, .3);
+    glutSolidTorus(.06, .14, 50, 50);
     glPopMatrix();
     
     //cylinder neck and leg
@@ -237,7 +252,7 @@ void draw_shed(){
     glTranslated(0, x, 0);
     glTranslated(0, .8, 0);
     glRotated(-90, 1, 0, 0);
-    glutWireCone(4.0, 2.5, 50, 50);
+    glutWireCone(4.0, 2.5, 40, 40);
     glPopMatrix();
     
     //cone umbrella lower
@@ -246,7 +261,7 @@ void draw_shed(){
     glTranslated(0, x, 0);
     glTranslated(0, 1.6, 0);
     glRotated(-90, 1, 0, 0);
-    glutWireCone(3.0, 2, 50, 50);
+    glutWireCone(3.0, 2, 30, 30);
     glPopMatrix();
 }
 
@@ -328,7 +343,7 @@ void draw_rocket(void){
     glPushMatrix();
     glTranslated(-3, .7, 5);
     glRotated(270, 1, 0, 0);
-    glutSolidCone(0.4, .8, 50, 50);
+    glutSolidCone(0.4, .8, 10, 10);
     glPopMatrix();
     
     //mid-lower cone
@@ -337,7 +352,7 @@ void draw_rocket(void){
     glPushMatrix();
     glTranslated(-3, .6, 5);
     glRotated(270, 1, 0, 0);
-    glutSolidCone(0.3, 0.6, 50, 50);
+    glutSolidCone(0.3, 0.6, 10, 10);
     glPopMatrix();
     
     //lower cone
@@ -345,7 +360,7 @@ void draw_rocket(void){
     glPushMatrix();
     glTranslated(-3, .5, 5);
     glRotated(270, 1, 0, 0);
-    glutSolidCone(0.3, 0.5, 50, 50);
+    glutSolidCone(0.3, 0.5, 10, 10);
     glPopMatrix();
     
     glPopMatrix();
@@ -374,7 +389,7 @@ void draw_satelite(void){
     glRotated(theta, 0, 1, 0);
     glTranslated(0, 2, 5);
     glRotated(90, 0, 1, 0);
-    glutWireCone(0.6, 0.6, 50, 50);
+    glutWireCone(0.6, 0.6, 10, 10);
     glPopMatrix();
     
     //right cone
@@ -384,7 +399,7 @@ void draw_satelite(void){
     glRotated(theta, 0, 1, 0);
     glTranslated(.6, 2, 5);
     glRotated(-90, 0, 1, 0);
-    glutWireCone(0.6, 0.6, 50, 50);
+    glutWireCone(0.6, 0.6, 10, 10);
     glPopMatrix();
     
     glPopMatrix();
@@ -501,7 +516,7 @@ int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(600, 600);
-    glutInitWindowPosition(200, 100);
+    glutInitWindowPosition(0, 100);
     glutCreateWindow("Alien Ball Juggling'");
     glClearColor(0, 0, 0.1, 1);
     
