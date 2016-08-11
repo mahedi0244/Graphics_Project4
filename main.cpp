@@ -24,6 +24,7 @@ GLfloat theta4 = 0;
 int theta1 = 0;
 int theta2 = 0;
 int theta3 = 0;
+int theta5 = 0;
 
 int y = 0;
 GLfloat x = 1.0;
@@ -293,8 +294,7 @@ void draw_rocket(void){
     gluQuadricDrawStyle(quadObj, GLU_FILL);
     
     glPushMatrix();
-    glTranslated(7, 6, 9);
-    glRotated(-90, 0, 0, 1);
+    
     
     //upper cone
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, front_amb_diff);
@@ -389,6 +389,15 @@ void display(void){
     
     glPushMatrix();
     glRotated(theta4, 0, 1, 0);
+    glTranslated(7, 6, 9);
+    glRotated(-90, 0, 0, 1);
+    draw_rocket();
+    glPopMatrix();
+    
+    glPushMatrix();
+    glRotated(theta5, 0, 1, 0);
+    glTranslated(7, 14, 9);
+    glRotated(90, 0, 0, 1);
     draw_rocket();
     glPopMatrix();
     
@@ -441,7 +450,6 @@ void idle(void){
     if (x > 2.5){
         
         theta = (theta < 360) ? theta + dt : dt;
-        theta4 = (theta4 < 360) ? theta4 + .2 : .2;
         
         if (theta1 <= 180 )
             theta1 = (theta1 + 4) % 180;
@@ -451,6 +459,11 @@ void idle(void){
         
         if (theta3 <= 45)
             theta3 = (theta3+1) % 45;
+        
+        theta4 = (theta4 < 360) ? theta4 + .2 : .2;
+        
+        if (theta5 < 360)
+            theta5 = (theta5-1) % 360;
     
     }
     
@@ -462,7 +475,7 @@ int main(int argc, char** argv) {
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(200, 100);
-    glutCreateWindow("Juggling Toys'");
+    glutCreateWindow("Alien Ball Juggling'");
     glClearColor(0, 0, 0.1, 1);
     
     glEnable(GL_DEPTH_TEST);
