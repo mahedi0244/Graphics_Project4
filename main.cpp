@@ -371,8 +371,8 @@ void draw_moon(){
     
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, white);
     glPushMatrix();
-    glTranslated(-9, 9, -9);
-    glutSolidSphere(2, 60, 60);
+    glTranslated(-11, 11, -18);
+    glutSolidSphere(1.5, 60, 60);
     glPopMatrix();
     
 }
@@ -380,7 +380,7 @@ void draw_moon(){
 void draw_satelite(void){
     
     glPushMatrix();
-    glTranslated(-8, 8, -8);
+    glTranslated(-12, 11, -15);
     
     //left cone
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, gray);
@@ -434,7 +434,7 @@ void display(void){
     
     glPushMatrix();
     glRotated(theta5, 0, 1, 0);
-    glTranslated(7, 14, 9);
+    glTranslated(7, 14, 16);
     glRotated(90, 0, 0, 1);
     draw_rocket();
     glPopMatrix();
